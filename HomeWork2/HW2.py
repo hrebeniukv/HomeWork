@@ -11,7 +11,7 @@
 - у будь-якому іншому випадку - вивести повідомлення  "А білетів вже немає!"
 
 P.S.  На екран має бути виведено лише одне повідомлення! Макож подумайте над варіантами, коли введені невірні дані'''
-
+# 1
 age = input("Enter your age: ")
 
 if age.isdigit():
@@ -27,3 +27,27 @@ if age.isdigit():
         print('А білетів вже немає!')
 else:
     print('Ви ввели невірні дані!!!')
+
+
+
+# 2
+'''Please check this one if you will have time.'''
+# try:
+#     age = int(input("Enter your age: "))
+# except ValueError:
+#     age = None
+#     print('Ви ввели невірні дані!!!')
+#
+# if age:
+#     if '7' in str(age):
+#         print('Вам сьогодні пощастить!')
+#     elif age < 7:
+#         print('Де твої батьки?')
+#     elif age < 16:
+#         print('Це фільм для дорослих!')
+#     elif age > 65:
+#         print('Покажіть пенсійне посвідчення!')
+#     else:
+#         print('А білетів вже немає!')
+
+
