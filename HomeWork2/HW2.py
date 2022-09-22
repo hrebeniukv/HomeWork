@@ -28,7 +28,7 @@ if age_input.isdigit():
         print('Покажіть пенсійне посвідчення!')
     else:
         print('А білетів вже немає!')
-elif not age_input.isdigit():
+else:
     print('Ви ввели невірні дані!!!')
 
 
