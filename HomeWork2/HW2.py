@@ -12,20 +12,23 @@
 
 P.S.  На екран має бути виведено лише одне повідомлення! Макож подумайте над варіантами, коли введені невірні дані'''
 # 1
-age = input("Enter your age: ")
+age_input = input("Enter your age: ")
 
-if age.isdigit():
-    if '7' in age:
+if age_input.isdigit():
+    age = int(age_input)
+    if '7' in age_input:
         print('Вам сьогодні пощастить!')
-    elif int(age) < 7:
+    elif age <= 0:
+        print('Ви ввели невірні дані, вказаний вік повинен бути додатнім числом')
+    elif age < 7:
         print('Де твої батьки?')
-    elif int(age) < 16:
+    elif age < 16:
         print('Це фільм для дорослих!')
-    elif int(age) > 65:
+    elif age > 65:
         print('Покажіть пенсійне посвідчення!')
     else:
         print('А білетів вже немає!')
-else:
+elif not age_input.isdigit():
     print('Ви ввели невірні дані!!!')
 
 
@@ -41,6 +44,8 @@ else:
 # if age:
 #     if '7' in str(age):
 #         print('Вам сьогодні пощастить!')
+#     elif age <= 0:
+#         print('Ви ввели невірні дані, вказаний вік повинен бути додатнім числом')
 #     elif age < 7:
 #         print('Де твої батьки?')
 #     elif age < 16:
