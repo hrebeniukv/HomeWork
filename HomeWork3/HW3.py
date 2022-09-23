@@ -4,29 +4,24 @@
 # Наприклад (слово - "Python" а номер символу 3) - "The 3 symbol in "Python" is 't' ".
 
 
-def cheking_symbol(entered_data):
-
-    try:
-        word, symbol_index = entered_data.split(" ")
-        symbol_index = int(symbol_index)
-        sear_leter = word[symbol_index]
-
-    except IndexError:
-        return "The word is too short!"
-
-    except ValueError:
-        return "Entered data are wrong, or you didn't enter any data!"
-
-    except Exception:
-        return "Something was wrong"
-
-    else:
-        return f"The {symbol_index} symbol in {word} is \'{sear_leter}\'."
-
-
 input_data = input("Enter by spacing the word and symbol which need to find in the entered word: ")
 
-print(cheking_symbol(input_data))
+try:
+    word, symbol_index = input_data.split(" ")
+    symbol_index = int(symbol_index)
+    search_leter = word[symbol_index]
+
+except IndexError:
+    print("The word is too short!")
+
+except ValueError:
+    print("Entered data are wrong, or you didn't enter any data!")
+
+except Exception:
+    print("Something was wrong")
+
+else:
+    print(f"The {symbol_index} symbol in {word} is \'{search_leter}\'.")
 
 
 
