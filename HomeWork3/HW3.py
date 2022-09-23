@@ -5,16 +5,21 @@
 
 
 def cheking_symbol(entered_data):
+
     try:
         word, symbol_index = entered_data.split(" ")
         symbol_index = int(symbol_index)
         sear_leter = word[symbol_index]
+
     except IndexError:
         return "The word is too short!"
+
     except ValueError:
         return "Entered data are wrong, or you didn't enter any data!"
+
     except Exception:
         return "Something was wrong"
+
     else:
         return f"The {symbol_index} symbol in {word} is \'{sear_leter}\'."
 
