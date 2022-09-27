@@ -35,7 +35,6 @@ print('first < second -->', variable_comparing)
 
 variable_comparing = first >= second
 print('first >= second -->', variable_comparing)
-
 variable_comparing = first <= second
 print('first <= second -->', variable_comparing)
 
