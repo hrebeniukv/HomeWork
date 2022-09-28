@@ -16,11 +16,14 @@ print(str_list(lst1))
 # Напишіть код, який видалить з нього всі числа, які менше 21 і більше 74.
 
 def renove_numbers(test_list: list) -> list:
-    test_list = [i for i in test_list if 21 <= i <= 74]
+    for number in test_list[::-1]:
+        if number < 21 or number > 74:
+            test_list.remove(number)
+
     return test_list
 
 
-list1 = [11, 77, 4, 22, 0, 56, 5, 95, 7, 5, 87, 13, 45, 67, 44]
+list1 = [11, 77, 4, 22, 0, 56, 5, 95, 7, 5, 87, 13, 45, 67, 44, 74, 21, 20, 75]
 print(renove_numbers(list1))
 
 
