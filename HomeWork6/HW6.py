@@ -20,15 +20,13 @@ def get_age(paceholder_message: str) -> int:
             age = int(input(paceholder_message))
         except:
             print("Ви ввели не коректні дані, спробуйте ще!")
-
-        if age > 0:
-            break
         else:
-            print('Ввудений вік повинен бути більший \'0\', спробуй ще!')
+            if age > 0:
+                break
+            else:
+                print('Ввудений вік повинен бути більший \'0\', спробуй ще!')
+
     return age
-
-
-age = get_age("Please, enter your age: ")
 
 
 def checking_age_multiplicity(age: int) -> str:
@@ -40,10 +38,10 @@ def checking_age_multiplicity(age: int) -> str:
         return 'років'
 
 
-age_multiplicity = checking_age_multiplicity(age)
+def cheking_age():
+    age = get_age('Введіть ваш вік: ')
+    age_multiplicity = checking_age_multiplicity(age)
 
-
-def cheking_age(age: int, age_multiplicity: str):
     if age % 10 == 7:
         print(f'Вам {age} {age_multiplicity}, вам пощастить!')
     elif 0 < age <= 7:
@@ -53,7 +51,9 @@ def cheking_age(age: int, age_multiplicity: str):
     elif age > 65:
         print(f'Вам {age} {age_multiplicity}? Покажіть пенсійне посвідчення!')
     else:
-        print(f'Незважаючи на те, що вам {age} {age_multiplicity}, білетів всеодно нема!')
+        print(f'Незважаючи на те, що вам {age} {age_multiplicity}, білетів всеодно немає!')
 
 
-cheking_age(age, age_multiplicity)
+cheking_age()
+
+
