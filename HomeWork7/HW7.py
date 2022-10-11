@@ -2,7 +2,7 @@
 # Напишіть докстрінг для цього декоратора
 
 
-def change_to_string_decorator(fun):
+def change_to_string(fun):
     """
     This decorator takes a function as an argument and modifies
     to string format the data returned by this function.
