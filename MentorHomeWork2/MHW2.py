@@ -28,14 +28,17 @@ def cheking_nubmer(test_number) -> bool:
 
 
 assert cheking_nubmer(10) is True
-assert cheking_nubmer(9999999) is False
 assert cheking_nubmer('10.00') is True
-assert cheking_nubmer('not a number') is False
-assert cheking_nubmer(10.2) is False
 assert cheking_nubmer(-10) is True
 assert cheking_nubmer(0) is True
 assert type(cheking_nubmer(10)) is bool
-
+assert cheking_nubmer(9999999) is False
+assert cheking_nubmer(10.2) is False
+assert cheking_nubmer('not a number') is False
+assert cheking_nubmer([10, 15]) is False
+assert cheking_nubmer(('Test', 10)) is False
+assert cheking_nubmer({'Test', 10}) is False
+assert cheking_nubmer({'Test': 10, 10: "Test"}) is False
 
 # cheking_nubmer(input("Please, enter the number: "))
 
@@ -59,12 +62,16 @@ def checking_string(test_string: str) -> bool:
 
 
 assert type(checking_string('Some text')) is bool
-assert checking_string(10) == False
-assert checking_string('test') == False
-assert checking_string('Test') == True
-assert checking_string('Test Test') == False
-assert checking_string('TEST ') == False
-assert checking_string('!Test') == False
-assert checking_string('Інша мова') == True
+assert checking_string('Test') is True
+assert checking_string('Інша мова') is True
+assert checking_string(10) is False
+assert checking_string('test') is False
+assert checking_string('Test Test') is False
+assert checking_string('TEST ') is False
+assert checking_string('!Test') is False
+assert checking_string(["Test", 15]) is False
+assert checking_string(('Test', 10)) is False
+assert checking_string({'Test', 10}) is False
+assert checking_string({'Test': 10, 10: "Test"}) is False
 
 # checking_string(input("Please, enter some text: "))
