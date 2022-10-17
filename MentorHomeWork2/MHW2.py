@@ -54,10 +54,8 @@ def checking_string(test_string: str) -> bool:
         test_string = str(test_string)
         return True if test_string[0].isalpha() and test_string == test_string.capitalize() else False
     except:
-        print('Something was wrong')
-
-
-# checking_string(input("Please, enter some text: "))
+        return False
+        # print('Something was wrong')
 
 
 assert type(checking_string('Some text')) is bool
@@ -68,3 +66,5 @@ assert checking_string('Test Test') == False
 assert checking_string('TEST ') == False
 assert checking_string('!Test') == False
 assert checking_string('Інша мова') == True
+
+# checking_string(input("Please, enter some text: "))
