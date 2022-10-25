@@ -20,37 +20,48 @@ class Bank_account:
 
     @property
     def percent(self):
+        """Return the value of private variable "__percent" """
         return self.__percent
 
     @percent.setter
-    def percent(self, new_percent):
+    def percent(self, new_percent: int):
+        """This function set the private variable "__percent" """
         self.__percent = new_percent
 
     @classmethod
-    def increase_class_deposit(cls, amount):
+    def increase_class_deposit(cls, amount: int or float):
+        """Function gets the mandatory variable and increase the class variable on the value of the got variable"""
         Bank_account.deposit += amount
 
-    def increase_deposit(self, amount):
+    def increase_deposit(self, amount: int or float):
+        """Function gets the mandatory variable and increase the self variable on the value of the got variable
+        also it triggers a class method for update the class variable"""
         self.deposit_amount += amount
         Bank_account.increase_class_deposit(amount)
 
     @classmethod
-    def decrease_class_deposit(cls, amount):
+    def decrease_class_deposit(cls, amount: int or float):
+        """Function gets the mandatory variable and decreases the class variable on the value of the got variable"""
         Bank_account.deposit -= amount
 
-    def decrease_deposit(self, amount):
-        if self.deposit_amount - amount >= 0:
+    def decrease_deposit(self, amount: int or float):
+        """Function gets the mandatory variable and decreases the self variable on the value of the got variable
+        also it triggers a class method for update the class variable"""
+        if self.deposit_amount >= amount:
             self.deposit_amount -= amount
+            Bank_account.decrease_class_deposit(amount)
         else:
+            Bank_account.decrease_class_deposit(self.deposit_amount)
             self.deposit_amount = 0
-        Bank_account.decrease_class_deposit(amount)
 
     def __del__(self):
-        print(
-            f"Рахунок номер {self.__account_number} закрито,сумма до повернена клієнту {self.name} становить {self.deposit_amount}грн.")
+        """This function 'kill' the object of class and print inform message,
+        also it triggers a class method for update the class variable"""
+        print(f"Рахунок номер {self.__account_number} закрито,сумма до повернена клієнту {self.name} становить {self.deposit_amount}грн.")
         Bank_account.decrease_class_deposit(self.deposit_amount)
 
-    def transfer(self, other_account, transfer_amount):
+    def transfer(self, other_account, transfer_amount: int or float):
+        """land money from self account to other_account, "transfer_amount" it is value of transfer """
         if self.deposit_amount > transfer_amount:
             self.deposit_amount -= transfer_amount
             other_account.deposit_amount += transfer_amount
@@ -67,6 +78,7 @@ class Bank_account:
 James = Bank_account('James', 9000, 7)
 Braian = Bank_account('Braian', 27000, 8)
 James.percent = 8
-Braian.decrease_deposit(29000)
+Braian.decrease_deposit(1000000)
 James.increase_deposit(10000)
 James.transfer(Braian, 8000)
+
