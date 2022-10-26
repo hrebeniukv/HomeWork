@@ -81,4 +81,3 @@ James.percent = 8
 Braian.decrease_deposit(1000000)
 James.increase_deposit(10000)
 James.transfer(Braian, 8000)
-
