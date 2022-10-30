@@ -31,7 +31,7 @@ class Bank_account:
     @classmethod
     def increase_class_deposit(cls, amount: int or float):
         """Function gets the mandatory variable and increase the class variable on the value of the got variable"""
-        Bank_account.deposit += amount
+        cls.deposit += amount
 
     def increase_deposit(self, amount: int or float):
         """Function gets the mandatory variable and increase the self variable on the value of the got variable
@@ -42,7 +42,7 @@ class Bank_account:
     @classmethod
     def decrease_class_deposit(cls, amount: int or float):
         """Function gets the mandatory variable and decreases the class variable on the value of the got variable"""
-        Bank_account.deposit -= amount
+        cls.deposit -= amount
 
     def decrease_deposit(self, amount: int or float):
         """Function gets the mandatory variable and decreases the self variable on the value of the got variable
