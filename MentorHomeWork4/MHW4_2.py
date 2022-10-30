@@ -74,9 +74,6 @@ class School:
         return self.__total_month_salary
 
 
-test_name = ["Jon", "Kris", "Ostin", "Bart"]
-test_last_name = ["Ossborne", "Engel", "Pouwer", "Simson"]
-test_salary = [18000, 25000, 13000, 27000]
 teacher1 = Teachers("Jon", "Ossborne", 18000)
 teacher2 = Teachers("Kris", "Engel", 12000)
 teacher3 = Teachers("Ostin", "Pouwer", 24000)
