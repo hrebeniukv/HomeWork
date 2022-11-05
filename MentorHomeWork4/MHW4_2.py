@@ -1,92 +1,72 @@
-from abc import abstractmethod
 import random
+from abc import ABC, abstractmethod
+from faker import Faker
+from random import randint, choice
 
 
-class SchoolEmployees:
-    total_salary = 0
+class SchoolEmployee(ABC):
+    employee_list = []
 
-    def __init__(self, name: str, last_name: str, salary: int):
+    def __init__(self, name: str, salary: int | float):
         self.name = name
-        self.last_name = last_name
         self.salary = salary
-        SchoolEmployees.total_teachers_salary(self.salary)
-        if type(self) is Teachers:
-            Teachers.teachers_list.append(f"{self.name} {self.last_name}")
-        elif type(self) is Staff:
-            Staff.staff_list.append(f"{self.name} {self.last_name}")
+        SchoolEmployee.employee_list.append(self)
 
     @abstractmethod
     def __str__(self):
-        return "Not Implemented Error"
-
-    @classmethod
-    def total_teachers_salary(cls, employee_salary):
-        cls.total_salary += employee_salary
+        pass
 
 
-class Staff(SchoolEmployees):
-    staff_list = []
+class Teacher(SchoolEmployee):
 
-    def __str__(self):
-        return f"New employee of technical staff is {self.name} {self.last_name} with salary {self.salary}UAH"
+    def __str__(self) -> str:
+        return f"The {self.name} is a teacher with salary {self.salary}UAH."
 
 
-class Teachers(SchoolEmployees):
-    teachers_list = []
+class TechnicalStaff(SchoolEmployee):
 
-    @classmethod
-    def add_teacher_to_lis(cls, teacher: str):
-        cls.teachers_list.append(teacher)
-
-    @classmethod
-    def remove_teacher_from_lis(cls, teacher: str):
-        cls.teachers_list.remove(teacher)
-
-    def __str__(self):
-        return f"New employee of technical staff is {self.name} {self.last_name} with salary {self.salary}UAH"
+    def __str__(self) -> str:
+        return f"The {self.name} is a worker of technical staff with salary {self.salary}UAH."
 
 
 class School:
 
-    def __init__(self, school_name: str, director: str, teachers_list: list, staff_list: list, total_month_salary: int):
+    def __init__(self, school_name: str, manager: Teacher, employee_list: list):
         self.school_name = school_name
-        self.teachers_list = teachers_list
-        self.staff_list = staff_list
-        if director in self.teachers_list:
-            Teachers.remove_teacher_from_lis(director)
-            self.director = director
-        else:
-            self.director = random.choice(self.teachers_list)
-            Teachers.remove_teacher_from_lis(self.director)
-        self.__total_month_salary = total_month_salary
-
-    def change_director(self, director_full_name: str):
-        Teachers.add_teacher_to_lis(self.director)
-        self.director = director_full_name
-        Teachers.remove_teacher_from_lis(self.director)
-
-    def new_teacher(self, name: str, last_name: str, salary: int):
-        Teachers(name, last_name, salary)
-        self.__total_month_salary += salary
+        self.manager = manager
+        self.teacher_list = [employee for employee in employee_list if
+                             isinstance(employee, Teacher) and employee != self.manager]
+        self.tech_staff_list = [employee for employee in employee_list if isinstance(employee, TechnicalStaff)]
+        self.__employee_list = employee_list
 
     @property
-    def get_total_salary(self):
-        return self.__total_month_salary
+    def total_employees_salary(self) -> int | float:
+        """Function count and receive the total salary of school employee"""
+        return sum([employee.__dict__['salary'] for employee in self.__employee_list])
+
+    def new_teacher(self, teacher: Teacher):
+        """Function use for add new teacher.
+        teacher: mandatory position argument, object of Teacher class
+        """
+        self.teacher_list.append(teacher)
+
+    def set_new_manager(self):
+        """Function random choose the manager from the teacher list. After chose, the object will remove from the
+          teacher list. The current manager will add to the list of teachers"""
+        new_manager = random.choice(self.teacher_list)
+        self.teacher_list.remove(new_manager)
+        self.teacher_list.append(self.manager)
+        self.manager = new_manager
+
+    def show_teachers_list(self) -> list:
+        """Function return the list on teachers"""
+        return [employee.__dict__['name'] for employee in self.__employee_list]
 
 
-teacher1 = Teachers("Jon", "Ossborne", 18000)
-teacher2 = Teachers("Kris", "Engel", 12000)
-teacher3 = Teachers("Ostin", "Pouwer", 24000)
-teacher4 = Teachers("Bart", "Simson", 32000)
-
-staff1 = Staff("Jon", "Engel", 13000)
-staff2 = Staff("Kris", "Pouwer", 7200)
-staff3 = Staff("Ostin", "Simson", 14000)
-staff4 = Staff("Bart", "Ossborne", 18000)
-
-sk1 = School("Barvinok", "Bart Ossborne", Teachers.teachers_list, Staff.staff_list, SchoolEmployees.total_salary)
-print(*sk1.teachers_list, sep="\n")
-print(f"The total salary of workers per month is equal to: {sk1.get_total_salary}UAH")
-sk1.new_teacher("Rasel", "Joui", 27000)
-sk1.change_director("Bart Simson")
-print(*sk1.teachers_list, sep="\n")
+teachers = [Teacher(Faker().name(), random.randint(20000, 50000)) for i in range(10)]
+staff = [TechnicalStaff(Faker().name(), random.randint(20000, 50000)) for i in range(10)]
+maneger = Teacher(Faker().name(), random.randint(20000, 50000))
+school1 = School("Barvinok", maneger, SchoolEmployee.employee_list)
+print(*school1.show_teachers_list(), sep="\n")
+print(school1.total_employees_salary)
+school1.set_new_manager()

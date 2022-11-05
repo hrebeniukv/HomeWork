@@ -116,4 +116,22 @@
 #
 #
 # print(d())
+import random
 
+from faker import Faker
+
+# print(Faker().name().split()[0])
+
+
+# print(fake.name().split()[1])
+class new:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    pass
+
+
+news = [new(Faker().name().split()[0], Faker().name().split()[1], random.randint(20000, 50000)) for i in range(10)]
+print()

@@ -6,7 +6,7 @@ import art
 class Bank_account:
     deposit: int = 0
 
-    def __init__(self, name: str, deposit_amount: int or float, percent: int):
+    def __init__(self, name: str, deposit_amount: int | float, percent: int):
         self.name = name
         self.deposit_amount = deposit_amount
         self.__percent = percent
@@ -33,18 +33,18 @@ class Bank_account:
         """Function gets the mandatory variable and increase the class variable on the value of the got variable"""
         cls.deposit += amount
 
-    def increase_deposit(self, amount: int or float):
+    def increase_deposit(self, amount: int | float):
         """Function gets the mandatory variable and increase the self variable on the value of the got variable
         also it triggers a class method for update the class variable"""
         self.deposit_amount += amount
         Bank_account.increase_class_deposit(amount)
 
     @classmethod
-    def decrease_class_deposit(cls, amount: int or float):
+    def decrease_class_deposit(cls, amount: int | float):
         """Function gets the mandatory variable and decreases the class variable on the value of the got variable"""
         cls.deposit -= amount
 
-    def decrease_deposit(self, amount: int or float):
+    def decrease_deposit(self, amount: int | float):
         """Function gets the mandatory variable and decreases the self variable on the value of the got variable
         also it triggers a class method for update the class variable"""
         if self.deposit_amount >= amount:
@@ -60,7 +60,7 @@ class Bank_account:
         print(f"Рахунок номер {self.__account_number} закрито,сумма до повернена клієнту {self.name} становить {self.deposit_amount}грн.")
         Bank_account.decrease_class_deposit(self.deposit_amount)
 
-    def transfer(self, other_account, transfer_amount: int or float):
+    def transfer(self, other_account, transfer_amount: int | float):
         """land money from self account to other_account, "transfer_amount" it is value of transfer """
         if self.deposit_amount > transfer_amount:
             self.deposit_amount -= transfer_amount
