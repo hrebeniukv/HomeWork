@@ -124,14 +124,8 @@ from faker import Faker
 
 
 # print(fake.name().split()[1])
-class new:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
 
-    pass
-
-
-news = [new(Faker().name().split()[0], Faker().name().split()[1], random.randint(20000, 50000)) for i in range(10)]
-print()
+a = [1, 2, 3]
+b = 2
+c = a+[b]
+print(c)

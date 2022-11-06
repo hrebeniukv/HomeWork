@@ -5,12 +5,10 @@ from random import randint, choice
 
 
 class SchoolEmployee(ABC):
-    employee_list = []
 
     def __init__(self, name: str, salary: int | float):
-        self.name = name
-        self.salary = salary
-        SchoolEmployee.employee_list.append(self)
+        self.name: str = name
+        self.salary: int | float = salary
 
     @abstractmethod
     def __str__(self):
@@ -31,18 +29,19 @@ class TechnicalStaff(SchoolEmployee):
 
 class School:
 
-    def __init__(self, school_name: str, manager: Teacher, employee_list: list):
-        self.school_name = school_name
-        self.manager = manager
-        self.teacher_list = [employee for employee in employee_list if
-                             isinstance(employee, Teacher) and employee != self.manager]
-        self.tech_staff_list = [employee for employee in employee_list if isinstance(employee, TechnicalStaff)]
-        self.__employee_list = employee_list
+    def __init__(self, school_name: str, manager: Teacher, teacher_number: int, staff_number: int):
+        self.school_name: str = school_name
+        self.manager: Teacher = manager
+        self.teacher_list: list = [Teacher(Faker().name(), random.randint(20000, 50000)) for i in range(teacher_number)]
+        self.tech_staff_list: list = [TechnicalStaff(Faker().name(), random.randint(20000, 50000)) for i in
+                                      range(staff_number)]
 
     @property
     def total_employees_salary(self) -> int | float:
         """Function count and receive the total salary of school employee"""
-        return sum([employee.__dict__['salary'] for employee in self.__employee_list])
+        all_employees = [self.manager] + self.teacher_list + self.tech_staff_list
+        total_salary = sum([employee.__dict__['salary'] for employee in all_employees])
+        return total_salary
 
     def new_teacher(self, teacher: Teacher):
         """Function use for add new teacher.
@@ -60,13 +59,15 @@ class School:
 
     def show_teachers_list(self) -> list:
         """Function return the list on teachers"""
-        return [employee.__dict__['name'] for employee in self.__employee_list]
+        return [employee.__dict__['name'] for employee in self.teacher_list]
 
 
-teachers = [Teacher(Faker().name(), random.randint(20000, 50000)) for i in range(10)]
-staff = [TechnicalStaff(Faker().name(), random.randint(20000, 50000)) for i in range(10)]
-maneger = Teacher(Faker().name(), random.randint(20000, 50000))
-school1 = School("Barvinok", maneger, SchoolEmployee.employee_list)
+school1 = School("Barvinok", Teacher(Faker().name(), random.randint(20000, 50000)), 12, 10)
 print(*school1.show_teachers_list(), sep="\n")
 print(school1.total_employees_salary)
 school1.set_new_manager()
+
+school2 = School("Barvinok3", Teacher(Faker().name(), random.randint(30000, 60000)), 5, 6)
+print(*school2.show_teachers_list(), sep="\n")
+print(school2.total_employees_salary)
+school2.set_new_manager()
